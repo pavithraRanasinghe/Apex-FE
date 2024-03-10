@@ -16,7 +16,6 @@ const Register: FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repassword, setRepassword] = useState("");
-  const [isLoading, setLoading] = useState(false);
 
   //Validation
   const [isNameValid, setIsNameValid] = useState(true);
@@ -98,7 +97,6 @@ const Register: FC = () => {
       password: password,
       passwordConfirm: repassword,
     });
-    setLoading(true);
     console.log(body);
     request(url, Constants.POST, body)
       .then((response) => {
@@ -110,7 +108,6 @@ const Register: FC = () => {
         toast.error("Registration not complete");
       })
       .finally(() => {
-        setLoading(false);
       });
   };
 
@@ -225,7 +222,6 @@ const Register: FC = () => {
         </Form>
       </div>
       <ToastContainer />
-      {/*{isLoading && <Loader />} */}
     </div>
   );
 };

@@ -14,7 +14,7 @@ export const IS_TOKEN_EXPIRED = false;
 //Email REGEX
 export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-
+// Shipment status details
 export const STATUS_INFO = {
   PENDING: {value: Status.PENDING, color: 'secondary' },
   ACCEPTED: {value: Status.ACCEPTED, color: 'info' },
@@ -24,6 +24,7 @@ export const STATUS_INFO = {
   RETURN: {value: Status.RETURN, color: 'danger' },
 }
 
+//Shipment status list
 export const SHIPMENT_STATUS = [
   STATUS_INFO.PENDING,
   STATUS_INFO.ACCEPTED,
