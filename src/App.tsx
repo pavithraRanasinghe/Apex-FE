@@ -5,11 +5,13 @@ import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import RequireAuth from "./components/RequireAuth";
 import AdminLogin from "./pages/AdminLogin";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <main>
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route element={<RequireAuth />}>

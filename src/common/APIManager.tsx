@@ -21,7 +21,6 @@ export const request = (endPoint: string, requestType: string, body: any) =>
       body: body,
     })
       .then((response) => {
-        console.log("RESPONSE ", response);
         response
           .json()
           .then((json) => {

@@ -1,5 +1,3 @@
-import { Status } from "../pages/Dashboard";
-
 
 export interface IShipment {
   id: number;
@@ -18,11 +16,26 @@ export interface IShipment {
 export interface IShipmentStatus {
   description: string;
   status: string;
-  createdAt: string;
+  date: string;
+  active: boolean;
 }
 
 export interface IShipmentUser{
   id:number;
   name: string;
   email: string;
+}
+
+export interface IShipmentTrack {
+  id: number;
+  trackingNumber: number;
+  createdAt: string;
+  recipientName: string;
+  recipientAddress: string;
+  recipientMobile: number;
+  packageDescription: string;
+  weight: number;
+  price: number;
+  statusList: IShipmentStatus[];
+  user?: IShipmentUser;
 }
