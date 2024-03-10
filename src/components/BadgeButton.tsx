@@ -11,7 +11,7 @@ type BadgeProps = {
 const BadgeButton: FC<BadgeProps> = (props: BadgeProps) => {
   return (
     <Button variant={props.variant} onClick={props.onClick}>
-      {props.text} <Badge bg="dark">{props.count}</Badge>
+      {props.text} <Badge bg="dark">1</Badge>
       <span className="visually-hidden"></span>
     </Button>
   );

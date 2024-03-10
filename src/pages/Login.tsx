@@ -142,7 +142,6 @@ const Login: FC = () => {
         </Form>
       </div>
       <ToastContainer />
-      {/* {isLoading && <Loader />} */}
     </div>
   );
 };
