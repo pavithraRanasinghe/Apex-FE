@@ -1,11 +1,14 @@
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "./css/Login.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { request } from "../utils/APIManager";
 import * as Constants from "../common/Constants";
 import { IUser } from "../interfaces/User";
-import { setUserStorage } from "../common/PersistanceManager";
+import { getUserStorage, removeUser, setUserStorage } from "../common/PersistanceManager";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,6 +18,13 @@ const Login = () => {
   const [isUsernameValid, setIsUsernameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [user, setUser] = useState({} as IUser);
+
+  useEffect(()=>{
+    const user: IUser = getUserStorage();
+    if(user){
+      removeUser(user)
+    }
+  }, []);
 
   const handleEmailChange = (event: any) => {
     setEmail(event.target.value);
@@ -48,9 +58,9 @@ const Login = () => {
     });
     request(url, Constants.POST, body)
       .then((response: any) => {
-        setUser(response.data.user);
+        setUser(response.data.user)
         if (user.email !== null && user.id !== 0) {
-          setUserStorage(user);
+          setUserStorage(response.data.user as IUser);
           clearField();
           navigate("/dashboard", { replace: true });
         } else {
@@ -58,7 +68,8 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        console.log(error.message)
+        console.log('ER:',error.message)
+        toast.error("Login Failed");
       })
   };
 
@@ -115,11 +126,15 @@ const Login = () => {
           </div>
           <p className="registerLink">
             Didn't have an account?
+            <Link to={"/register"} style={{ textDecoration: "none" }}>
+              {" "}
+              Register
+            </Link>
           </p>
         </Form>
       </div>
-      {/* <ToastContainer />
-      {isLoading && <Loader />} */}
+      <ToastContainer />
+      {/* {isLoading && <Loader />} */}
     </div>
   );
 };
