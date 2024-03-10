@@ -1,0 +1,29 @@
+.register-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 40px;
+  padding-bottom: 40px;
+  width: 45vw;
+  border: 2px solid black;
+  border-radius: 12px;
+}
+
+.invalidText {
+  color: red;
+}
+.agree-row {
+  width: 25vw;
+  margin: auto;
+}
+
+.wrapper{
+  display: flex;
+  align-items: center;
+}
+
+.register-button{
+  width: 25vw;
+  margin: auto;
+}

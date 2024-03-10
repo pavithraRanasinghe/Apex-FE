@@ -9,6 +9,9 @@ export const DELETE = "DELETE";
 export const USER = "user";
 export const IS_TOKEN_EXPIRED = false;
 
+//Email REGEX
+export const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export const LOGGED_USER_PATHS = [
   "/home",
   "/Home"
