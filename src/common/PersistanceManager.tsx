@@ -1,9 +1,13 @@
 import { IUser } from "../interfaces/User";
 import * as Constants from "./Constants";
 
+/**
+ * Save user to the local storage
+ * 
+ * @param user Logged user
+ */
 export const setUserStorage = async (user: IUser) => {
   try {
-    console.log('USER : ', user);
     const jsonValue = JSON.stringify(user);
     localStorage.setItem(Constants.USER, jsonValue);
   } catch (e) {
@@ -11,6 +15,11 @@ export const setUserStorage = async (user: IUser) => {
   }
 };
 
+/**
+ * Fetch user from the local storage
+ * 
+ * @returns 
+ */
 export const getUserStorage = () => {
   try {
     const value = localStorage.getItem(Constants.USER);
@@ -24,6 +33,11 @@ export const getUserStorage = () => {
   }
 };
 
+/**
+ * Remove user from the local storage
+ * 
+ * @param user user
+ */
 export const removeUser = async (user: IUser) => {
   try {
     localStorage.removeItem(Constants.USER);

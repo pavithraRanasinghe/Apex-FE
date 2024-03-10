@@ -29,6 +29,11 @@ const AdminDashboard: FC = () => {
     loadShipments(Status.PENDING);
   }, []);
 
+  /**
+   * Load shipment list by status from BE 
+   * 
+   * @param status Shipment status
+   */
   const loadShipments = (status: Status) => {
     const url = `/api/admin/shipment/status/${status}`;
     request(url, Constants.GET, null)
@@ -40,6 +45,12 @@ const AdminDashboard: FC = () => {
       });
   };
 
+  /**
+   * Capture selected status from table
+   * 
+   * @param event Select event details
+   * @param data Table row data
+   */
   const handleSelect = (event: any, data: IShipment) => {
     setShowConfirmModal(true);
     switch (event.target.value) {
@@ -62,27 +73,29 @@ const AdminDashboard: FC = () => {
         setSelectedStatus(Status.RETURN);
         break;
     }
-    setSelectedShipment(data.id)
+    setSelectedShipment(data.id);
   };
 
+  /**
+   * Update shipment status
+   */
   const handleConfirm = () => {
-    console.log('selectedStatus : ',selectedStatus)
-    const url = '/api/admin/shipment';
+    const url = "/api/admin/shipment";
     const body = JSON.stringify({
-        shipmentId: selectedShipment,
-        status: selectedStatus
+      shipmentId: selectedShipment,
+      status: selectedStatus,
     });
     request(url, Constants.PUT, body)
-    .then((response: any)=>{
-        toast.success('Status updated');
+      .then((response: any) => {
+        toast.success("Status updated");
         loadShipments(currentStatus);
-    }).
-    catch(()=>{
-        toast.error('Status not updated');
-    })
-    .finally(()=>{
+      })
+      .catch(() => {
+        toast.error("Status not updated");
+      })
+      .finally(() => {
         setShowConfirmModal(false);
-    })
+      });
   };
   return (
     <>
@@ -131,7 +144,7 @@ const AdminDashboard: FC = () => {
                 {
                   <Form.Select
                     aria-label="Default select example"
-                    onChange={(e)=>handleSelect(e,data)}
+                    onChange={(e) => handleSelect(e, data)}
                   >
                     <option>Update</option>
                     {Constants.SHIPMENT_STATUS.map((data, index) => (

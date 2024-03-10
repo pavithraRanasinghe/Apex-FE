@@ -77,7 +77,6 @@ const AdminLogin: FC = () => {
         }
       })
       .catch((error) => {
-        console.log('ER:',error.message)
         toast.error("Login Failed");
       })
   };

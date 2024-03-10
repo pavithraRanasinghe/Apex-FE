@@ -22,10 +22,19 @@ const Dashboard: FC = () => {
   const [shipmentList, setShipmentList] = useState([] as IShipment[]);
   const [showShipmentModel, setShowShipmentModel] = useState(false);
 
+  /**
+   * Load pending shipments when render the page
+   */
   useEffect(() => {
     loadShipments(Status.PENDING);
   }, []);
 
+  /**
+   * Load all shipements by status
+   * Related to logged user
+   * 
+   * @param status Shipment status
+   */
   const loadShipments = (status: Status) => {
     const url = `/api/shipment/status/${status}`;
 

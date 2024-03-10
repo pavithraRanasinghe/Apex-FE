@@ -48,6 +48,9 @@ const ShipmentModel: FC<ShipementProps> = (props: ShipementProps) => {
     setWeight(event.target.value);
   };
 
+  /**
+   * Create new shipment
+   */
   const handleCreate = () => {
     const url = "/api/shipment";
     const body = JSON.stringify({
@@ -58,19 +61,23 @@ const ShipmentModel: FC<ShipementProps> = (props: ShipementProps) => {
       weight: parseFloat(weight),
       userId: user.id,
     });
-    console.log("BODY : ", body);
     request(url, Constants.POST, body)
       .then((response: any) => {
-        console.log('RE : ', response);
         toast.success(response.message);
-        // props.onHide();
+        clearField();
       })
       .catch((error) => {
-        console.log('ERR : ', error);
         toast.error("Shipment not created");
-        // props.onHide();
       });
   };
+  
+  const clearField = ()=>{
+    setRecipientName("");
+    setRecipientAddress("");
+    setRecipientMobile("");
+    setPackageDescription("");
+    setWeight("");
+  }
 
   return (
     <div>

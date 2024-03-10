@@ -20,7 +20,6 @@ const Login: FC = () => {
   const [user, setUser] = useState({} as IUser);
 
   const location = useLocation();
-  const [isLoading, setLoading] = useState(false);
   
   useEffect(()=>{
     const user: IUser = getUserStorage();
