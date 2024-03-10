@@ -1,16 +1,16 @@
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import "./css/Login.css";
-import { useEffect, useState } from "react";
-import { request } from "../utils/APIManager";
+import { FC, useEffect, useState } from "react";
+import { request } from "../common/APIManager";
 import * as Constants from "../common/Constants";
 import { IUser } from "../interfaces/User";
 import { getUserStorage, removeUser, setUserStorage } from "../common/PersistanceManager";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = () => {
+const Login: FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("" as string);
   const [password, setPassword] = useState("" as string);
@@ -19,10 +19,18 @@ const Login = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [user, setUser] = useState({} as IUser);
 
+  const location = useLocation();
+  const [isLoading, setLoading] = useState(false);
+  
   useEffect(()=>{
     const user: IUser = getUserStorage();
     if(user){
       removeUser(user)
+    }
+    const queryParam = new URLSearchParams(location.search);
+    const expire = queryParam.get("expire");
+    if (expire) {
+      toast.error("Session Expired");
     }
   }, []);
 
