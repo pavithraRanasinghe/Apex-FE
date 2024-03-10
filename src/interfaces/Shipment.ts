@@ -2,6 +2,7 @@ import { Status } from "../pages/Dashboard";
 
 
 export interface IShipment {
+  id: number;
   trackingNumber: number;
   createdAt: string;
   recipientName: string;
@@ -11,10 +12,17 @@ export interface IShipment {
   weight: number;
   price: number;
   shipmentStatus: IShipmentStatus;
+  user?: IShipmentUser;
 }
 
 export interface IShipmentStatus {
   description: string;
-  status: Status;
+  status: string;
   createdAt: string;
+}
+
+export interface IShipmentUser{
+  id:number;
+  name: string;
+  email: string;
 }
