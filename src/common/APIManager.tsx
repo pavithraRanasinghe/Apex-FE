@@ -1,12 +1,15 @@
+import { getUserStorage, removeUser } from "./PersistanceManager";
+import { IUser } from "../interfaces/User";
+
 export const request = (endPoint: string, requestType: string, body: any) =>
   new Promise(async (resolve, reject) => {
     const BASE_URL = process.env.REACT_APP_BASE_URL;
-    const token = "";
+    let token = "";
 
-    // const user = getUser();
-    // if (user) {
-    //   token = 'Bearer ' + user.token;
-    // }
+    const user = getUserStorage() as IUser;
+    if (user) {
+      token = 'Bearer ' + user.token;
+    }
 
     fetch(BASE_URL + endPoint, {
       method: requestType,
@@ -28,14 +31,14 @@ export const request = (endPoint: string, requestType: string, body: any) =>
               reject(json);
             } else {
               if (response.status === 401 || response.status === 403) {
-                // LogOutUser();
+                LogOutUser();
               }
               reject(json);
             }
           })
           .catch((error) => {
             if (response.status === 401 || response.status === 403) {
-              // LogOutUser();
+              LogOutUser();
             }
             reject(response.status);
           });
@@ -44,3 +47,7 @@ export const request = (endPoint: string, requestType: string, body: any) =>
         reject(error);
       });
   });
+
+  export const LogOutUser = ()=>{
+    window.location.href = '/login?expire=true'
+  }

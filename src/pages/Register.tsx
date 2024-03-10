@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,9 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import * as Constants from "../common/Constants";
 import "./css/Register.css";
-import { request } from "../utils/APIManager";
+import { request } from "../common/APIManager";
 
-const Register = () => {
+const Register: FC = () => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -26,7 +26,7 @@ const Register = () => {
   const [isPasswordLengthValid, setIsPassworLengthValid] = useState(true);
   const [isRePasswordValid, setIsRePassworValid] = useState(true);
 
-  const handleFirstNameChange = (event: any) => {
+  const handleNameChange = (event: any) => {
     setName(event.target.value);
   };
 
@@ -137,7 +137,7 @@ const Register = () => {
               type="text"
               placeholder="Name"
               value={name}
-              onChange={handleFirstNameChange}
+              onChange={handleNameChange}
             />
             {!isNameValid && (
               <p className="invalidText">Name cann't be empty</p>
